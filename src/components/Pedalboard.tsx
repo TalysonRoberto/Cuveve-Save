@@ -6,9 +6,10 @@ import ParamField from './ParamField';
 interface PedalboardProps {
   parametros: Parametros;
   onChange: (key: ParametroKey, param: Parametro) => void;
+  readOnly?: boolean;
 }
 
-export default function Pedalboard({ parametros, onChange }: PedalboardProps) {
+export default function Pedalboard({ parametros, onChange, readOnly }: PedalboardProps) {
   const knobsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,6 +31,7 @@ export default function Pedalboard({ parametros, onChange }: PedalboardProps) {
             def={def}
             param={parametros[def.key]}
             onChange={(p) => onChange(def.key, p)}
+            readOnly={readOnly}
           />
         ))}
       </div>

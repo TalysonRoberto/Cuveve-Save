@@ -9,6 +9,7 @@ interface KnobProps {
   valor: number;
   ativo: boolean;
   onChange: (valor: number) => void;
+  readOnly?: boolean;
 }
 
 const GRUPO_COR: Record<ParametroDef['grupo'], string> = {
@@ -24,7 +25,7 @@ function polar(ang: number, raio: number): { x: number; y: number } {
   return { x: 50 + raio * Math.sin(rad), y: 50 - raio * Math.cos(rad) };
 }
 
-export default function Knob({ def, valor, ativo, onChange }: KnobProps) {
+export default function Knob({ def, valor, ativo, onChange, readOnly }: KnobProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const dragging = useRef(false);
   const animacao = useRef<JSAnimation | undefined>(undefined);
@@ -114,21 +115,21 @@ export default function Knob({ def, valor, ativo, onChange }: KnobProps) {
   return (
     <svg
       ref={svgRef}
-      className={`knob ${ativo ? '' : 'knob-off'}`}
+      className={`knob ${ativo ? '' : 'knob-off'} ${readOnly ? 'knob-readonly' : ''}`}
       viewBox="0 0 100 100"
-      role="slider"
-      tabIndex={0}
+      role={readOnly ? undefined : 'slider'}
+      tabIndex={readOnly ? -1 : 0}
       aria-label={def.label}
       aria-valuemin={def.min}
       aria-valuemax={def.max}
       aria-valuenow={valor}
-      aria-disabled={!ativo}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={onPointerUp}
-      onPointerCancel={onPointerUp}
-      onKeyDown={onKeyDown}
-      onWheel={onWheel}
+      aria-disabled={!ativo || readOnly}
+      onPointerDown={readOnly ? undefined : onPointerDown}
+      onPointerMove={readOnly ? undefined : onPointerMove}
+      onPointerUp={readOnly ? undefined : onPointerUp}
+      onPointerCancel={readOnly ? undefined : onPointerUp}
+      onKeyDown={readOnly ? undefined : onKeyDown}
+      onWheel={readOnly ? undefined : onWheel}
     >
       <defs>
         <radialGradient id={gradId} cx="38%" cy="32%" r="75%">

@@ -22,8 +22,8 @@ tags: [knob, pedalboard, svg, animacao]
 
 ## Hierarquia
 
-- **`Pedalboard`** — painel do pedal: marca CUVAVE, fileira dos 10 `ParamField` (scroll horizontal no mobile) e 3 footswitches A/B/C **decorativos** (`aria-hidden`, sem letras de banco — decisão do solicitante). Props: `parametros` + `onChange(key, param)` — componente controlado.
-- **`ParamField`** — um parâmetro completo: label colorida por grupo + `Knob` + `<input type="number">` + toggle ON/OFF. Sync bidirecional com `clampValor`; input permite apagar/redigitar e clampa no blur; desativar preserva `valor`.
+- **`Pedalboard`** — painel do pedal: marca CUVAVE, fileira dos 10 `ParamField`. Desktop: fileira única (scroll horizontal). Mobile retrato: **pedal totalmente vertical** — 10 parâmetros empilhados, cada um como uma linha horizontal (knob + label + input + toggle), ocupando a tela toda sem scroll. Mobile paisagem: fileira horizontal (como desktop). Aceita prop `readOnly` para travar interações. Footswitches A/B/C removidos na v1.2.
+- **`ParamField`** — um parâmetro completo: label colorida por grupo + `Knob` + `<input type="number">` + toggle ON/OFF. Sync bidirecional com `clampValor`; input permite apagar/redigitar e clampa no blur; desativar preserva `valor`. Suporta `readOnly` (input/toggle disabled, knob sem interação).
 - **`Knob`** — SVG 100×100: dome com gradiente (`useId` por instância!), LED interno na cor do grupo (cinza OFF), indicador rotacionado, anel com 9 pontos **clicáveis** só nos knobs 0–8. Interações: drag rotativo (pointer capture), teclado (setas/Home/End, `role="slider"`), roda do mouse.
 
 ## knobMath.ts (pura)
@@ -37,7 +37,7 @@ O Knob separa **valor** (prop) de **ângulo exibido** (state): mudança externa 
 
 ## Layout responsivo
 
-Desktop e mobile paisagem: fileira única com scroll horizontal (`display: flex; overflow-x: auto`). **Mobile retrato (≤720px, orientation: portrait): coluna vertical** — cada `.param` vira uma linha (`display: grid`, 2 colunas: knob esquerda, controles direita), com divisores entre parâmetros. Todas as 10 linhas visíveis com scroll vertical natural. Entrada em cascata (`staggerIn` nos `.param`) na montagem.
+Desktop e mobile paisagem: fileira única com scroll horizontal (`display: flex; overflow-x: auto`). **Mobile retrato (≤720px, orientation: portrait): pedal totalmente vertical, sem scroll** — `.pedal` e `.pedal-knobs` esticam para ocupar a tela inteira; cada `.param` vira uma linha horizontal compacta (`display: grid`, 4 colunas: knob + label + input + toggle), com divisores entre parâmetros. Knob reduzido (~38-50px) para caber todos os 10 parâmetros visíveis de uma vez. Entrada em cascata (`staggerIn` nos `.param`) na montagem.
 
 ## Estado desativado (acessibilidade)
 

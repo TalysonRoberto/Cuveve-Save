@@ -57,7 +57,7 @@ O músico consegue salvar e recuperar fielmente o estado completo da pedaleira (
 | Decisão | Justificativa | Resultado |
 |---------|---------------|-----------|
 | localStorage em vez de backend/Supabase | Ferramenta individual, zero infra, funciona offline | ✓ Boa |
-| Visualização de setup é editável | Músico ajusta e ressalva sem recriar o setup | ✓ Boa |
+| Visualização travada por padrão; modo edição por botão | Solicitante mudou: tela limpa focada no pedal, Editar habilita alterações | ✓ Boa |
 | Múltiplas tags por setup | Um setup pode ser "Som Pesado" e "Som com Efeito" ao mesmo tempo | ✓ Boa |
 | Footswitches A/B/C removidos do visual (v1.2) | Solicitante removeu; não fazem parte dos dados salváveis | ✓ Boa |
 | Badge de tag no canto do item salvo | PRD pedia "chip/etiqueta no canto do item" com destaque visual | ✓ Boa |

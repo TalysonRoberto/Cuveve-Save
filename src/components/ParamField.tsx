@@ -7,20 +7,23 @@ interface ParamFieldProps {
   def: ParametroDef;
   param: Parametro;
   onChange: (param: Parametro) => void;
+  readOnly?: boolean;
 }
 
 /**
  * Um parâmetro completo: label + knob + input numérico + toggle ativo.
  * Sincronização bidirecional knob ↔ input, com clamp na faixa.
  */
-export default function ParamField({ def, param, onChange }: ParamFieldProps) {
+export default function ParamField({ def, param, onChange, readOnly }: ParamFieldProps) {
   const knobWrapRef = useRef<HTMLDivElement>(null);
 
   const setValor = (valor: number) => {
+    if (readOnly) return;
     onChange({ ...param, valor: clampValor(def, valor) });
   };
 
   const setAtivo = (ativo: boolean) => {
+    if (readOnly) return;
     // Valor é preservado ao desativar (KNOB-07)
     bounce(knobWrapRef.current);
     onChange({ ...param, ativo });
@@ -42,7 +45,7 @@ export default function ParamField({ def, param, onChange }: ParamFieldProps) {
     <div className={`param param-${def.grupo} ${param.ativo ? '' : 'param-off'}`} data-param={def.key}>
       <span className="param-label">{def.label}</span>
       <div className="param-knob" ref={knobWrapRef}>
-        <Knob def={def} valor={param.valor} ativo={param.ativo} onChange={setValor} />
+        <Knob def={def} valor={param.valor} ativo={param.ativo} onChange={setValor} readOnly={readOnly} />
       </div>
       <input
         className="param-input"
@@ -55,6 +58,7 @@ export default function ParamField({ def, param, onChange }: ParamFieldProps) {
         aria-label={`${def.label} valor`}
         onChange={onInput}
         onBlur={onBlur}
+        disabled={readOnly}
       />
       <button
         type="button"
@@ -63,6 +67,7 @@ export default function ParamField({ def, param, onChange }: ParamFieldProps) {
         aria-label={`${def.label} ${param.ativo ? 'ativo' : 'desativado'}`}
         title={param.ativo ? 'Desativar' : 'Ativar'}
         onClick={() => setAtivo(!param.ativo)}
+        disabled={readOnly}
       >
         {param.ativo ? 'ON' : 'OFF'}
       </button>
