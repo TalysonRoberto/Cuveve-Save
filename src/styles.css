@@ -418,6 +418,247 @@ body {
   color: var(--text-dim);
 }
 
+/* ----- Toast ----- */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.4rem;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #08130b;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.7rem 1.4rem;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+  z-index: 50;
+  animation: toast-in 0.18s ease-out;
+  max-width: min(90vw, 420px);
+  text-align: center;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* ----- TagInput ----- */
+
+.tag-input {
+  position: relative;
+}
+
+.tag-input-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.5rem 0.6rem;
+  min-height: 2.9rem;
+}
+
+.tag-input-chips:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.chip-x {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0 0 0.15rem;
+}
+
+.chip-x:hover {
+  color: var(--grupo-vermelho);
+}
+
+.tag-input-field {
+  flex: 1;
+  min-width: 120px;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 0.95rem;
+  padding: 0.2rem;
+}
+
+.tag-input-field:focus {
+  outline: none;
+}
+
+.tag-sugestoes {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0.3rem;
+  list-style: none;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 20;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.tag-sugestoes button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 0.95rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.tag-sugestoes button:hover {
+  background: var(--bg-raised);
+}
+
+.tag-criar {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ----- Form do setup / barra de ações ----- */
+
+.setup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: min(560px, 100%);
+}
+
+.action-bar {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+/* ----- Listagem de setups ----- */
+
+.filtro-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.setup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 0.9rem;
+}
+
+.setup-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.15s ease, transform 0.06s ease;
+}
+
+.setup-card:hover {
+  border-color: var(--text-dim);
+}
+
+.setup-card:active {
+  transform: scale(0.99);
+}
+
+.setup-card-top {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.setup-nome {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.setup-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.setup-data {
+  font-size: 0.8rem;
+}
+
+/* ----- Gerenciador de tags ----- */
+
+.tag-nova {
+  display: flex;
+  gap: 0.6rem;
+  width: min(560px, 100%);
+}
+
+.tag-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: min(680px, 100%);
+}
+
+.tag-linha {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.tag-linha .input {
+  width: auto;
+  flex: 1;
+  min-width: 140px;
+}
+
+.tag-usos {
+  font-size: 0.85rem;
+  flex: 1;
+}
+
+.tag-acoes {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.tag-acoes .btn {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+
 @media (max-width: 640px) {
   .page {
     padding: 1rem;

@@ -9,12 +9,27 @@ Ver: .planning/PROJECT.md (atualizado em 2026-07-24)
 
 ## Posição Atual
 
-Fase: 3 de 3 (Fluxo de Setups & Tags)
-Plano: 0 de 1 na fase atual
-Status: Pronto para planejar
-Última atividade: 2026-07-24 — Fase 2 concluída (Knob + Pedalboard interativos; 14 testes verdes, build ok)
+Fase: 3 de 3 (Fluxo de Setups & Tags) — **v1.0 entregue**
+Plano: 1 de 1 na fase atual
+Status: Fase concluída
+Última atividade: 2026-07-24 — Fase 3 concluída (fluxo completo de setups/tags; 14 testes verdes, build ok, preview servido)
 
-Progresso: [██████░░░░] 66%
+Progresso: [██████████] 100%
+
+## Métricas de Performance
+
+**Velocidade:**
+- Total de planos concluídos: 3
+- Duração média: —
+- Tempo total de execução: ~1 sessão
+
+**Por Fase:**
+
+| Fase | Planos | Total | Média/Plano |
+|------|--------|-------|-------------|
+| 1. Fundação & Dados | 1 | 1 | — |
+| 2. Pedaleira Visual | 1 | 1 | — |
+| 3. Fluxo de Setups & Tags | 1 | 1 | — |
 
 ## Métricas de Performance
 

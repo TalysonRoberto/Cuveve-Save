@@ -12,23 +12,23 @@ O músico consegue salvar e recuperar fielmente o estado completo da pedaleira (
 
 ### Validados
 
-(Nenhum ainda — lançar para validar)
+- ✓ Tela inicial com duas ações visíveis sem scroll — v1.0 (Fase 1)
+- ✓ Persistência durável em localStorage — v1.0 (Fase 1)
+- ✓ Pedaleira visual fiel: 10 knobs na ordem e cores do pedal Cuvave — v1.0 (Fase 2)
+- ✓ Knob contínuo 0–100 (VOLUME) e knobs snap 0–8 com anel de marcação — v1.0 (Fase 2)
+- ✓ Sincronização bidirecional knob ↔ campo numérico com clamp — v1.0 (Fase 2)
+- ✓ Ativo/desativado por parâmetro: cinza imediato e reversível, valor preservado, indicador não só por cor — v1.0 (Fase 2)
+- ✓ Criação de setup: nome obrigatório, múltiplas tags (criar/reutilizar, grafia normalizada) — v1.0 (Fase 3)
+- ✓ Salvar com toast + redirect; setup aparece na listagem sem refresh — v1.0 (Fase 3)
+- ✓ Listagem com chips e filtro instantâneo por tag (inclui "Todas") — v1.0 (Fase 3)
+- ✓ Visualização editável fiel ao estado salvo (valores e cinzas) — v1.0 (Fase 3)
+- ✓ Duplicar e excluir setup (com confirmação) — v1.0 (Fase 3)
+- ✓ Gerenciamento de tags: renomear, excluir, contagem de uso — v1.0 (Fase 3)
+- ✓ Layout responsivo desktop e mobile — v1.0 (Fases 1–3)
 
 ### Ativos
 
-- [ ] Tela inicial com duas ações visíveis sem scroll: "Ver Setups" e "Salvar Novo Setup"
-- [ ] Criação de setup com nome obrigatório, tags opcionais (criar nova ou reutilizar existente, múltiplas tags por setup)
-- [ ] Pedaleira visual fiel ao pedal Cuvave: 10 knobs em fileira (VOLUME→IR CAB→REVERB→MIX→FB→TIME→MOD→TONE→GAIN→TYPE) com cores por grupo (branco, verde ×2, azul ×4, vermelho ×3)
-- [ ] Knob contínuo 0–100 (VOLUME) e knobs com snap em 9 posições 0–8 (demais), com anel de marcação de posição
-- [ ] Sincronização bidirecional knob ↔ campo numérico digitável, com clamp na faixa
-- [ ] Estado ativo/desativado por parâmetro (cinza quando desativado, valor preservado) com indicador não apenas por cor (acessibilidade)
-- [ ] Persistência durável em localStorage (setup salvo aparece na listagem sem refresh)
-- [ ] Listagem com chips de tag, filtro instantâneo por tag (inclui "Todas") e normalização de grafia de tag
-- [ ] Tela de visualização editável: abre fiel ao estado salvo e permite alterar e ressalvar
-- [ ] Excluir setup (com confirmação) e duplicar setup
-- [ ] Gerenciamento de tags: renomear, excluir, ver contagem de setups por tag
-- [ ] Feedback visual de sucesso ao salvar (toast)
-- [ ] Layout responsivo desktop e mobile
+(Nenhum — v1.0 entregue; ver Requisitos v2 em `.planning/REQUIREMENTS.md`)
 
 ### Fora do Escopo
 
@@ -56,12 +56,13 @@ O músico consegue salvar e recuperar fielmente o estado completo da pedaleira (
 
 | Decisão | Justificativa | Resultado |
 |---------|---------------|-----------|
-| localStorage em vez de backend/Supabase | Ferramenta individual, zero infra, funciona offline | — Pendente |
-| Visualização de setup é editável | Músico ajusta e ressalva sem recriar o setup | — Pendente |
-| Múltiplas tags por setup | Um setup pode ser "Som Pesado" e "Som com Efeito" ao mesmo tempo | — Pendente |
-| Footswitches A/B/C só decorativos | Fazem parte do corpo físico, não dos dados salváveis | — Pendente |
-| Letras de banco (E,A,D,G,B…) fora do visual | Decisão explícita do solicitante | — Pendente |
-| Default de criação: tudo 0 e ativo | Simples e previsível; PRD deixava em aberto | — Pendente |
+| localStorage em vez de backend/Supabase | Ferramenta individual, zero infra, funciona offline | ✓ Boa |
+| Visualização de setup é editável | Músico ajusta e ressalva sem recriar o setup | ✓ Boa |
+| Múltiplas tags por setup | Um setup pode ser "Som Pesado" e "Som com Efeito" ao mesmo tempo | ✓ Boa |
+| Footswitches A/B/C só decorativos | Fazem parte do corpo físico, não dos dados salváveis | ✓ Boa |
+| Letras de banco (E,A,D,G,B…) fora do visual | Decisão explícita do solicitante | ✓ Boa |
+| Default de criação: tudo 0 e ativo | Simples e previsível; PRD deixava em aberto | ✓ Boa |
+| HashRouter + `base: './'` | App funciona em qualquer estático e até via `file://` | ✓ Boa |
 
 ## Evolução
 
@@ -81,4 +82,4 @@ Este documento evolui nas transições de fase e fronteiras de milestone.
 4. Atualizar Contexto com estado atual
 
 ---
-*Última atualização: 2026-07-24 após inicialização*
+*Última atualização: 2026-07-24 após entrega da v1.0 (Fases 1–3)*
