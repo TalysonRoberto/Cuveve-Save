@@ -20,7 +20,7 @@ export default function Pedalboard({ parametros, onChange, readOnly }: Pedalboar
   return (
     <section className="pedal" aria-label="Pedaleira Cuvave">
       <div className="pedal-top">
-        <span className="pedal-brand">CUVAVE</span>
+        <span className="pedal-brand pedal-brand-top">CUVAVE</span>
         <span className="pedal-led" aria-hidden="true" />
       </div>
 
@@ -34,6 +34,10 @@ export default function Pedalboard({ parametros, onChange, readOnly }: Pedalboar
             readOnly={readOnly}
           />
         ))}
+      </div>
+
+      <div className="pedal-bottom" aria-hidden="true">
+        <span className="pedal-brand pedal-brand-bottom">CUVAVE</span>
       </div>
     </section>
   );

@@ -1004,7 +1004,7 @@ body {
   font-size: 0.85rem;
 }
 
-/* ----- Mobile retrato: pedaleira TOTALMENTE vertical (uma linha por parâmetro) ----- */
+/* ----- Mobile retrato: pedaleira VERTICAL igual ao print ----- */
 
 @media (max-width: 720px) and (orientation: portrait) {
   .page {
@@ -1022,6 +1022,8 @@ body {
   .setup-pedal {
     flex: 1;
     min-height: 0;
+    display: flex;
+    justify-content: center;
   }
 
   .setup-pedal .pedal {
@@ -1058,9 +1060,12 @@ body {
     font-size: 0.85rem;
   }
 
+  /* Pedal como painel vertical estreito e alto */
   .pedal {
-    padding: 0.55rem 0.65rem;
-    border-radius: 18px;
+    width: min(92vw, 300px);
+    margin: 0 auto;
+    padding: 0.6rem 0.7rem;
+    border-radius: 22px;
     flex: 1;
     min-height: 0;
     display: flex;
@@ -1069,7 +1074,12 @@ body {
   }
 
   .pedal-top {
-    padding: 0 0.25rem 0.35rem;
+    justify-content: center;
+    padding: 0 0 0.35rem;
+  }
+
+  .pedal-brand-top {
+    display: none;
   }
 
   .pedal-brand {
@@ -1081,29 +1091,48 @@ body {
     height: 8px;
   }
 
-  /* Coluna vertical: 10 parâmetros empilhados, sem scroll, sem quebra */
+  .pedal-bottom {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.25rem 0 0;
+    min-height: 1.6rem;
+  }
+
+  .pedal-brand-bottom {
+    display: inline-block;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    line-height: 1;
+  }
+
+  /* Knobs empilhados verticalmente, ordem invertida (TYPE no topo, VOLUME embaixo) */
   .pedal-knobs {
     flex: 1;
     display: flex;
-    flex-direction: column;
-    gap: 0;
+    flex-direction: column-reverse;
+    gap: 0.15rem;
     overflow: hidden;
     justify-content: space-between;
+    padding: 0 0.2rem;
   }
 
-  /* Cada parâmetro vira uma linha horizontal: knob + nome + valor + toggle */
+  /* Cada parâmetro: [label girado] [knob] [valor] [toggle] */
   .param {
     display: grid;
-    grid-template-columns: auto 1fr auto auto;
+    grid-template-columns: 1.4rem auto 2.2rem auto;
     grid-template-rows: auto;
     align-items: center;
-    column-gap: 0.6rem;
+    justify-items: center;
+    column-gap: 0.35rem;
     flex: 1;
     min-height: 0;
     width: 100%;
     min-width: 0;
     max-width: none;
-    padding: 0.15rem 0.35rem;
+    padding: 0.05rem 0;
     border-radius: 0;
   }
 
@@ -1112,37 +1141,55 @@ body {
   }
 
   .param-knob {
-    grid-column: 1;
+    grid-column: 2;
     grid-row: 1;
   }
 
   .param-label {
-    grid-column: 2;
+    grid-column: 1;
     grid-row: 1;
-    font-size: 0.68rem;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
     padding: 0;
-    justify-self: start;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    text-align: center;
+    line-height: 1;
+    width: 1.4rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .param-input {
     grid-column: 3;
     grid-row: 1;
-    width: 2.6rem;
-    font-size: 0.78rem;
-    padding: 0.18rem 0.1rem;
+    width: 2.2rem;
+    font-size: 0.75rem;
+    padding: 0.15rem 0.1rem;
     margin: 0;
+    text-align: center;
+    background: transparent;
+    border: none;
+  }
+
+  .param-input:disabled {
+    color: var(--text);
+    opacity: 1;
   }
 
   .param-toggle {
     grid-column: 4;
     grid-row: 1;
     font-size: 0.52rem;
-    padding: 0.18rem 0.45rem;
+    padding: 0.16rem 0.4rem;
   }
 
-  /* Knob pequeno para caber 10 linhas sem scroll */
+  /* Knob compacto para caber 10 sem scroll */
   .knob {
-    width: clamp(38px, 9vw, 50px);
+    width: clamp(46px, 11vw, 58px);
   }
 
   .brand-save {
@@ -1172,13 +1219,23 @@ body {
 }
 
 @media (max-width: 380px) and (orientation: portrait) {
+  .pedal {
+    padding: 0.5rem 0.55rem;
+    border-radius: 18px;
+  }
+
   .param-label {
-    font-size: 0.62rem;
+    font-size: 0.55rem;
+    width: 1.2rem;
   }
 
   .param-input {
-    width: 2.4rem;
-    font-size: 0.72rem;
+    width: 2rem;
+    font-size: 0.7rem;
+  }
+
+  .knob {
+    width: clamp(42px, 10vw, 52px);
   }
 
   .setup-actions .btn {
