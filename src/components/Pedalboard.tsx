@@ -21,7 +21,6 @@ export default function Pedalboard({ parametros, onChange, readOnly }: Pedalboar
     <section className="pedal" aria-label="Pedaleira Cuvave">
       <div className="pedal-top">
         <span className="pedal-brand pedal-brand-top">CUVAVE</span>
-        <span className="pedal-led" aria-hidden="true" />
       </div>
 
       <div className="pedal-knobs" role="group" aria-label="Parâmetros" ref={knobsRef}>

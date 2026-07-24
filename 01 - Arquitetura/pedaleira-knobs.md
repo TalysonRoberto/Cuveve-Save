@@ -16,7 +16,7 @@ tags: [knob, pedalboard, svg, animacao]
 ---
 
 > [!tldr] TL;DR
-> A pedaleira é 3 componentes aninhados: `Pedalboard` → `ParamField` → `Knob` (SVG). Toda a física do giro está em `knobMath.ts` (pura, testada); as animações (mola do indicador, stagger de entrada) vêm de `animations.ts` (anime.js v4). `PARAM_DEFS` em `types.ts` é a fonte única de ordem, rótulos, faixas e cores. No mobile retrato os parâmetros viram uma coluna vertical (knob + controles por linha); na paisagem mantém a fileira horizontal. Footswitches A/B/C removidos na v1.2.
+> A pedaleira é 3 componentes aninhados: `Pedalboard` → `ParamField` → `Knob` (SVG). Toda a física do giro está em `knobMath.ts` (pura, testada); as animações (mola do indicador, stagger de entrada) vêm de `animations.ts` (anime.js v4). `PARAM_DEFS` em `types.ts` é a fonte única de ordem, rótulos, faixas e cores. No mobile retrato os 10 parâmetros são empilhados verticalmente (TYPE no topo, VOLUME embaixo via `column-reverse`); cada parâmetro é uma linha horizontal com label, knob, valor e ON todos deitados (na horizontal). Na paisagem mantém a fileira horizontal. Footswitches A/B/C removidos na v1.2.
 
 # Pedaleira & Knobs
 
@@ -37,7 +37,11 @@ O Knob separa **valor** (prop) de **ângulo exibido** (state): mudança externa 
 
 ## Layout responsivo
 
-Desktop e mobile paisagem: fileira única com scroll horizontal (`display: flex; overflow-x: auto`). **Mobile retrato (≤720px, orientation: portrait): pedal totalmente vertical, sem scroll** — painel estreito/alto (`width: min(92vw, 300px)`), `.pedal-knobs` usa `column-reverse` para inverter a ordem (TYPE no topo, VOLUME embaixo); cada `.param` vira uma linha (`display: grid`, 4 colunas: label girado + knob + valor + toggle), divisores entre parâmetros; labels usam `writing-mode: vertical-rl` + `rotate(180deg)`. Logo CUVAVE girado na parte inferior. Knob reduzido (~42-58px) para caber todos os 10 visíveis. Entrada em cascata (`staggerIn` nos `.param`) na montagem.
+Desktop e mobile paisagem: fileira única com scroll horizontal (`display: flex; overflow-x: auto`). **Mobile retrato (≤720px, orientation: portrait): pedal totalmente vertical** — painel estreito/alto (`width: min(92vw, 260px)`), `display: flex` com `flex-direction: column`. LED removido; CUVAVE girado 90° anti-horário no canto inferior esquerdo. `.pedal-knobs` usa `column-reverse` para inverter a ordem (TYPE no topo, VOLUME embaixo). Cada `.param` é uma linha horizontal com **colunas alinhadas** (label | knob | valor | ON), todos os textos girados 90° anti-horário individualmente com `transform: rotate(-90deg)`. Sem linhas divisórias; valor e ON bem próximos do knob. Se não couber, o `.pedal-knobs` rola verticalmente (scrollbar oculta). Entrada em cascata (`staggerIn` nos `.param`) na montagem.
+
+## Estética do knob
+
+Dome escuro via `radialGradient` (#3a3b44 → #181920 → #0d0e12). LED interno e indicador usam a cor do grupo; quando OFF caem para `--desativado`. Glow SVG (`feGaussianBlur stdDeviation="4"`) aplicado no LED e nos pontos de posição ativos para dar o brilho da referência. Indicador fino (2.2px) com círculo na ponta. Pontos inativos ficam com `opacity: 0.45` e cor `--border`.
 
 ## Estado desativado (acessibilidade)
 

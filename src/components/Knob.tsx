@@ -133,12 +133,12 @@ export default function Knob({ def, valor, ativo, onChange, readOnly }: KnobProp
     >
       <defs>
         <radialGradient id={gradId} cx="38%" cy="32%" r="75%">
-          <stop offset="0%" stopColor="#454650" />
-          <stop offset="70%" stopColor="#1e1f26" />
-          <stop offset="100%" stopColor="#12131a" />
+          <stop offset="0%" stopColor="#3a3b44" />
+          <stop offset="55%" stopColor="#181920" />
+          <stop offset="100%" stopColor="#0d0e12" />
         </radialGradient>
-        <filter id={glowId} x="-60%" y="-60%" width="220%" height="220%">
-          <feGaussianBlur stdDeviation="2.6" result="blur" />
+        <filter id={glowId} x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="4" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />
@@ -158,6 +158,8 @@ export default function Knob({ def, valor, ativo, onChange, readOnly }: KnobProp
             r={i === posicaoAtual ? 3.2 : 2.2}
             className="knob-dot"
             fill={ativoPonto ? cor : 'var(--border)'}
+            filter={ativoPonto ? `url(#${glowId})` : undefined}
+            opacity={ativoPonto ? 1 : 0.45}
             onPointerDown={(e) => {
               e.stopPropagation();
               onChange(def.min + i);
@@ -186,8 +188,8 @@ export default function Knob({ def, valor, ativo, onChange, readOnly }: KnobProp
 
       {/* Indicador de posição (ângulo animado) */}
       <g transform={`rotate(${anguloExibido} 50 50)`}>
-        <line x1="50" y1="50" x2="50" y2="22" stroke={cor} strokeWidth="3.4" strokeLinecap="round" />
-        <circle cx="50" cy="20" r="2.6" fill={cor} />
+        <line x1="50" y1="50" x2="50" y2="23" stroke={cor} strokeWidth="2.2" strokeLinecap="round" />
+        <circle cx="50" cy="21" r="2.2" fill={cor} />
       </g>
     </svg>
   );
