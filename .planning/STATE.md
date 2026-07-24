@@ -9,12 +9,12 @@ Ver: .planning/PROJECT.md (atualizado em 2026-07-24)
 
 ## Posição Atual
 
-Fase: 2 de 3 (Pedaleira Visual)
+Fase: 3 de 3 (Fluxo de Setups & Tags)
 Plano: 0 de 1 na fase atual
 Status: Pronto para planejar
-Última atividade: 2026-07-24 — Fase 1 concluída (scaffold, modelo, storage, Home; 7 testes verdes, build ok)
+Última atividade: 2026-07-24 — Fase 2 concluída (Knob + Pedalboard interativos; 14 testes verdes, build ok)
 
-Progresso: [███░░░░░░░] 33%
+Progresso: [██████░░░░] 66%
 
 ## Métricas de Performance
 

@@ -1,14 +1,26 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Pedalboard from '../components/Pedalboard';
+import { Parametro, ParametroKey, createDefaultParametros } from '../types';
 
-// Placeholder da Fase 1 — implementada nas Fases 2–3.
+// Fase 2: pedaleira interativa com estado local.
+// Fase 3 completa: nome, tags, salvar/carregar, modos criar/editar/visualizar.
 export default function SetupEdit() {
+  const [parametros, setParametros] = useState(createDefaultParametros);
+
+  const onChangeParam = (key: ParametroKey, param: Parametro) => {
+    setParametros((atual) => ({ ...atual, [key]: param }));
+  };
+
   return (
     <main className="page">
-      <h1>Setup</h1>
-      <p className="muted">Em construção (Fases 2–3).</p>
-      <Link to="/" className="btn btn-outline">
-        Voltar
-      </Link>
+      <div className="page-header">
+        <h1>Novo Setup</h1>
+        <Link to="/" className="btn btn-outline">
+          Voltar
+        </Link>
+      </div>
+      <Pedalboard parametros={parametros} onChange={onChangeParam} />
     </main>
   );
 }
