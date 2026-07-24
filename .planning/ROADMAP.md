@@ -10,7 +10,7 @@ Do zero ao catálogo digital de setups da pedaleira Cuvave em 3 fases: primeiro 
 - Fases inteiras (1, 2, 3): Trabalho planejado do milestone
 - Fases decimais (2.1, 2.2): Inserções urgentes (marcadas com INSERIDA)
 
-- [ ] **Fase 1: Fundação & Dados** — Scaffold Vite+React+TS, modelo de dados, persistência localStorage, rotas e Home
+- [x] **Fase 1: Fundação & Dados** — Scaffold Vite+React+TS, modelo de dados, persistência localStorage, rotas e Home
 - [ ] **Fase 2: Pedaleira Visual** — Componente Knob (contínuo e snap), anel de posições, cores do pedal, input sincronizado, ativo/desativado
 - [ ] **Fase 3: Fluxo de Setups & Tags** — Criar/editar/visualizar/excluir/duplicar setups, listagem com filtro, tags completas
 
@@ -28,7 +28,7 @@ Do zero ao catálogo digital de setups da pedaleira Cuvave em 3 fases: primeiro 
 **Planos**: 1 plano
 
 Planos:
-- [ ] 01-01: Scaffold + modelo de dados + storage + rotas + Home
+- [x] 01-01: Scaffold + modelo de dados + storage + rotas + Home
 
 ### Fase 2: Pedaleira Visual
 **Objetivo**: Componente Knob reutilizável (contínuo 0–100 e snap 0–8 com anel de marcação), painel Pedalboard com os 10 knobs na ordem e cores do pedal Cuvave, input numérico sincronizado bidirecionalmente e toggle ativo/desativado com estado cinza acessível.
@@ -67,6 +67,6 @@ As fases executam em ordem numérica: 1 → 2 → 3
 
 | Fase | Planos Completos | Status | Concluída |
 |------|------------------|--------|-----------|
-| 1. Fundação & Dados | 0/1 | Não iniciada | - |
+| 1. Fundação & Dados | 1/1 | Complete | 2026-07-24 |
 | 2. Pedaleira Visual | 0/1 | Não iniciada | - |
 | 3. Fluxo de Setups & Tags | 0/1 | Não iniciada | - |

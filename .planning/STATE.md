@@ -9,12 +9,12 @@ Ver: .planning/PROJECT.md (atualizado em 2026-07-24)
 
 ## Posição Atual
 
-Fase: 1 de 3 (Fundação & Dados)
+Fase: 2 de 3 (Pedaleira Visual)
 Plano: 0 de 1 na fase atual
 Status: Pronto para planejar
-Última atividade: 2026-07-24 — Projeto inicializado (PROJECT, REQUIREMENTS, ROADMAP)
+Última atividade: 2026-07-24 — Fase 1 concluída (scaffold, modelo, storage, Home; 7 testes verdes, build ok)
 
-Progresso: [░░░░░░░░░░] 0%
+Progresso: [███░░░░░░░] 33%
 
 ## Métricas de Performance
 
