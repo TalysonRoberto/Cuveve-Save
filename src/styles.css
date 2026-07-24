@@ -640,47 +640,6 @@ body {
   border-style: dashed;
 }
 
-/* ----- Footswitches decorativos ----- */
-
-.pedal-foots {
-  display: flex;
-  justify-content: space-around;
-  gap: 1rem;
-  margin-top: 1.1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
-}
-
-.footswitch {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-  opacity: 0.8;
-}
-
-.footswitch-label {
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--text-dim);
-}
-
-.footswitch-btn {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #53545f, #23242b 70%);
-  border: 2px solid #383944;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-}
-
-.footswitch-letter {
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: var(--text-dim);
-}
-
 /* ----- Toast ----- */
 
 .toast {
@@ -841,21 +800,44 @@ body {
   transform: scale(0.985);
 }
 
-.setup-card-top {
+/* Badge de tag no canto superior direito do item salvo */
+.setup-badges {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: -0.15rem -0.15rem 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.24rem 0.62rem;
+  color: var(--accent);
+  background: rgba(52, 224, 106, 0.12);
+  border: 1px solid rgba(52, 224, 106, 0.45);
+  box-shadow: 0 0 12px rgba(52, 224, 106, 0.14);
+  white-space: nowrap;
+}
+
+.badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
 }
 
 .setup-nome {
   margin: 0;
   font-size: 1.12rem;
-}
-
-.setup-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
 }
 
 .setup-data {
@@ -909,49 +891,76 @@ body {
   font-size: 0.85rem;
 }
 
-/* ----- Mobile: pedaleira em grade 5×2, alvos maiores ----- */
+/* ----- Mobile retrato: pedaleira na vertical (uma linha por parâmetro) ----- */
 
-@media (max-width: 720px) {
+@media (max-width: 720px) and (orientation: portrait) {
   .page {
     padding: 1rem 0.9rem calc(1.5rem + env(safe-area-inset-bottom));
   }
 
   .pedal {
-    padding: 0.85rem 0.6rem 1.2rem;
+    padding: 0.85rem 0.7rem 1rem;
     border-radius: 18px;
   }
 
+  /* Coluna vertical: todos os 10 parâmetros visíveis, sem quebra de linha */
   .pedal-knobs {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.3rem 0.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
     overflow-x: visible;
   }
 
+  /* Cada parâmetro vira uma linha: knob à esquerda, controles à direita */
   .param {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: repeat(3, auto);
+    column-gap: 1rem;
+    align-items: center;
+    justify-items: start;
     flex: none;
+    width: 100%;
     min-width: 0;
     max-width: none;
-    width: 100%;
-    padding: 0.35rem 0 0.5rem;
+    padding: 0.55rem 0.6rem;
+    border-radius: 0;
   }
 
-  .knob {
-    width: min(15vw, 72px);
+  .param + .param {
+    border-top: 1px solid var(--border);
+  }
+
+  .param-knob {
+    grid-column: 1;
+    grid-row: 1 / 4;
+  }
+
+  .param-label {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 0.78rem;
+    padding-bottom: 0.15rem;
   }
 
   .param-input {
-    width: 2.9rem;
-    font-size: 0.88rem;
+    grid-column: 2;
+    grid-row: 2;
+    width: 4.2rem;
+    font-size: 1.05rem;
+    padding: 0.4rem 0.2rem;
+    margin: 0.2rem 0;
   }
 
-  .pedal-foots {
-    margin-top: 0.8rem;
+  .param-toggle {
+    grid-column: 2;
+    grid-row: 3;
+    font-size: 0.68rem;
+    padding: 0.28rem 0.7rem;
   }
 
-  .footswitch-btn {
-    width: 40px;
-    height: 40px;
+  .knob {
+    width: clamp(72px, 22vw, 92px);
   }
 
   .brand-save {
@@ -984,13 +993,9 @@ body {
   }
 }
 
-@media (max-width: 380px) {
-  .knob {
-    width: 15.5vw;
-  }
-
+@media (max-width: 380px) and (orientation: portrait) {
   .param-label {
-    font-size: 0.58rem;
+    font-size: 0.72rem;
   }
 }
 

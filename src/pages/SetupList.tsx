@@ -84,19 +84,19 @@ export default function SetupList() {
         <div className="setup-grid" ref={gridRef}>
           {filtrados.map((s) => (
             <Link key={s.id} to={`/setups/${s.id}`} className="card setup-card">
-              <div className="setup-card-top">
-                <h2 className="setup-nome">{s.nome}</h2>
-                <div className="setup-chips">
+              {s.tagIds.length > 0 && (
+                <div className="setup-badges" aria-label="Tags do setup">
                   {s.tagIds.map((id) => {
                     const t = tagsPorId.get(id);
                     return t ? (
-                      <span key={id} className="chip">
+                      <span key={id} className="badge">
                         {t.nome}
                       </span>
                     ) : null;
                   })}
                 </div>
-              </div>
+              )}
+              <h2 className="setup-nome">{s.nome}</h2>
               <span className="muted setup-data">
                 Atualizado em {new Date(s.atualizadoEm).toLocaleDateString('pt-BR')}
               </span>

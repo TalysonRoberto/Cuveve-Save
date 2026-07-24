@@ -24,5 +24,6 @@ tags: [glossario, dominio]
 | Grupo/cor | Agrupamento visual do pedal: branco (VOLUME), verde (IR CAB, REVERB), azul (MIX, FB, TIME, MOD), vermelho (TONE, GAIN, TYPE) | [[visao-geral]] |
 | Ativo/desativado | Estado de cada parâmetro; desativado renderiza cinza e preserva o valor | [[01 - Arquitetura]] |
 | Tag | Etiqueta livre associada a setups (ex: "Som Pesado"); normalizada case-insensitive para evitar duplicata | [[02 - Banco de Dados]] |
-| Footswitch | Botões físicos A/B/C do pedal; no app apenas decorativos (não salvos) | [[visao-geral]] |
+| Footswitch | Botões físicos A/B/C do pedal; removidos do visual na v1.2 (não salvos) | [[visao-geral]] |
+| Badge | Etiqueta destacada em cada setup na listagem (canto da direita, com glow verde e ícone de ponto) | [[fluxo-setups]] |
 | kit-mcp / framework | Kit de workflow em `.claude/` (fases, planning, roadmap) usado para construir o projeto | [[padrao-do-cofre]] |

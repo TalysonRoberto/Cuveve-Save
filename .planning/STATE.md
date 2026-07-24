@@ -12,7 +12,7 @@ Ver: .planning/PROJECT.md (atualizado em 2026-07-24)
 Fase: 4 de 4 (Visual Moderno & Mobile) — **v1.1 entregue**
 Plano: 1 de 1 na fase atual
 Status: Fase concluída
-Última atividade: 2026-07-24 — Fase 4 concluída (anime.js, nav global, mobile-first; 14 testes verdes, build ok)
+Última atividade: 2026-07-24 — v1.2: footswitches removidos, pedaleira vertical no retrato, badges de tag na listagem
 
 Progresso: [██████████] 100%
 

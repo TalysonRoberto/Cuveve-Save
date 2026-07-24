@@ -16,7 +16,7 @@ tags: [knob, pedalboard, svg, animacao]
 ---
 
 > [!tldr] TL;DR
-> A pedaleira é 3 componentes aninhados: `Pedalboard` → `ParamField` → `Knob` (SVG). Toda a física do giro está em `knobMath.ts` (pura, testada); as animações (mola do indicador, stagger de entrada) vêm de `animations.ts` (anime.js v4). `PARAM_DEFS` em `types.ts` é a fonte única de ordem, rótulos, faixas e cores. No mobile a pedaleira vira grade 5×2.
+> A pedaleira é 3 componentes aninhados: `Pedalboard` → `ParamField` → `Knob` (SVG). Toda a física do giro está em `knobMath.ts` (pura, testada); as animações (mola do indicador, stagger de entrada) vêm de `animations.ts` (anime.js v4). `PARAM_DEFS` em `types.ts` é a fonte única de ordem, rótulos, faixas e cores. No mobile retrato os parâmetros viram uma coluna vertical (knob + controles por linha); na paisagem mantém a fileira horizontal. Footswitches A/B/C removidos na v1.2.
 
 # Pedaleira & Knobs
 
@@ -37,7 +37,7 @@ O Knob separa **valor** (prop) de **ângulo exibido** (state): mudança externa 
 
 ## Layout responsivo
 
-Desktop: fileira única com scroll horizontal. **Mobile (≤720px): grade CSS 5×2** (`grid-template-columns: repeat(5, 1fr)`), knobs ~15vw, alvos de toque maiores. Entrada em cascata (`staggerIn` nos `.param`) na montagem.
+Desktop e mobile paisagem: fileira única com scroll horizontal (`display: flex; overflow-x: auto`). **Mobile retrato (≤720px, orientation: portrait): coluna vertical** — cada `.param` vira uma linha (`display: grid`, 2 colunas: knob esquerda, controles direita), com divisores entre parâmetros. Todas as 10 linhas visíveis com scroll vertical natural. Entrada em cascata (`staggerIn` nos `.param`) na montagem.
 
 ## Estado desativado (acessibilidade)
 

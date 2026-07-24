@@ -59,7 +59,9 @@ O músico consegue salvar e recuperar fielmente o estado completo da pedaleira (
 | localStorage em vez de backend/Supabase | Ferramenta individual, zero infra, funciona offline | ✓ Boa |
 | Visualização de setup é editável | Músico ajusta e ressalva sem recriar o setup | ✓ Boa |
 | Múltiplas tags por setup | Um setup pode ser "Som Pesado" e "Som com Efeito" ao mesmo tempo | ✓ Boa |
-| Footswitches A/B/C só decorativos | Fazem parte do corpo físico, não dos dados salváveis | ✓ Boa |
+| Footswitches A/B/C removidos do visual (v1.2) | Solicitante removeu; não fazem parte dos dados salváveis | ✓ Boa |
+| Badge de tag no canto do item salvo | PRD pedia "chip/etiqueta no canto do item" com destaque visual | ✓ Boa |
+| Pedaleira vertical no mobile retrato | Coluna de linhas por parâmetro, sem quebra de linha, visível com scroll natural | ✓ Boa |
 | Letras de banco (E,A,D,G,B…) fora do visual | Decisão explícita do solicitante | ✓ Boa |
 | Default de criação: tudo 0 e ativo | Simples e previsível; PRD deixava em aberto | ✓ Boa |
 | HashRouter + `base: './'` | App funciona em qualquer estático e até via `file://` | ✓ Boa |
