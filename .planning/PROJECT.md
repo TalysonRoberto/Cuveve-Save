@@ -63,6 +63,8 @@ O músico consegue salvar e recuperar fielmente o estado completo da pedaleira (
 | Letras de banco (E,A,D,G,B…) fora do visual | Decisão explícita do solicitante | ✓ Boa |
 | Default de criação: tudo 0 e ativo | Simples e previsível; PRD deixava em aberto | ✓ Boa |
 | HashRouter + `base: './'` | App funciona em qualquer estático e até via `file://` | ✓ Boa |
+| anime.js v4 para animações | Pedido do solicitante; mola do knob e staggers com pouco código; guarda de reduced-motion | ✓ Boa |
+| Nav global em vez de botões "Voltar" | Pedido do solicitante: Página Inicial/Ver Setup como links, Novo Setup como botão no topo direito | ✓ Boa |
 
 ## Evolução
 
@@ -82,4 +84,4 @@ Este documento evolui nas transições de fase e fronteiras de milestone.
 4. Atualizar Contexto com estado atual
 
 ---
-*Última atualização: 2026-07-24 após entrega da v1.0 (Fases 1–3)*
+*Última atualização: 2026-07-24 após entrega da v1.1 (Fase 4 — visual moderno)*

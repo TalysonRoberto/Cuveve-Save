@@ -13,6 +13,7 @@ Do zero ao catálogo digital de setups da pedaleira Cuvave em 3 fases: primeiro 
 - [x] **Fase 1: Fundação & Dados** — Scaffold Vite+React+TS, modelo de dados, persistência localStorage, rotas e Home
 - [x] **Fase 2: Pedaleira Visual** — Componente Knob (contínuo e snap), anel de posições, cores do pedal, input sincronizado, ativo/desativado
 - [x] **Fase 3: Fluxo de Setups & Tags** — Criar/editar/visualizar/excluir/duplicar setups, listagem com filtro, tags completas
+- [x] **Fase 4: Visual Moderno & Mobile (INSERIDA)** — Visual atual com animações anime.js, mobile-first, navegação global (Página Inicial / Ver Setup; botão Novo Setup no topo direito)
 
 ## Detalhes das Fases
 
@@ -60,13 +61,28 @@ Planos:
 Planos:
 - [x] 03-01: Telas de Criar/Editar/Visualizar + Listagem com filtro + TagManager + Toast
 
+### Fase 4: Visual Moderno & Mobile (INSERIDA)
+**Objetivo**: Modernizar o visual com animações anime.js v4 (entradas com stagger, knob com física de mola, micro-interações), layout mobile-first (pedaleira em grade 5×2 no celular) e navegação global com "Página Inicial" e "Ver Setup" como links e "Novo Setup" como botão no canto superior direito.
+**Depende de**: Fase 3
+**Critérios de Sucesso** (o que deve ser VERDADEIRO):
+  1. Em qualquer tela, o usuário navega para a Página Inicial e para Ver Setup pela barra superior; o botão Novo Setup está no canto superior direito
+  2. Na listagem, o usuário volta ao menu inicial pela navegação
+  3. Ao digitar um valor ou clicar numa posição, o knob gira com animação de mola; ao arrastar, responde direto com LED em destaque
+  4. No celular, os 10 knobs aparecem em grade 5×2 com alvos de toque confortáveis
+  5. Animações são desativadas quando o sistema pede movimento reduzido
+**Planos**: 1 plano
+
+Planos:
+- [x] 04-01: Nav global + animações anime.js + CSS moderno mobile-first
+
 ## Progresso
 
 **Ordem de Execução:**
-As fases executam em ordem numérica: 1 → 2 → 3
+As fases executam em ordem numérica: 1 → 2 → 3 → 4
 
 | Fase | Planos Completos | Status | Concluída |
 |------|------------------|--------|-----------|
 | 1. Fundação & Dados | 1/1 | Complete | 2026-07-24 |
 | 2. Pedaleira Visual | 1/1 | Complete | 2026-07-24 |
 | 3. Fluxo de Setups & Tags | 1/1 | Complete | 2026-07-24 |
+| 4. Visual Moderno & Mobile | 1/1 | Complete | 2026-07-24 |

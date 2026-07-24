@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Toast, { useToast } from '../components/Toast';
+import { pageIn, staggerIn } from '../animations';
 import { listSetups, listTags } from '../storage';
 import { Setup, Tag } from '../types';
 
@@ -9,6 +10,8 @@ const TODAS = '__todas__';
 export default function SetupList() {
   const location = useLocation();
   const { toast, showToast } = useToast();
+  const rootRef = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const [setups, setSetups] = useState<Setup[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
@@ -17,6 +20,7 @@ export default function SetupList() {
   useEffect(() => {
     setSetups(listSetups());
     setTags(listTags());
+    pageIn(rootRef.current);
   }, []);
 
   // Toast vindo de ações (salvar/duplicar/excluir) na tela de setup
@@ -32,18 +36,19 @@ export default function SetupList() {
 
   const filtrados = filtro === TODAS ? setups : setups.filter((s) => s.tagIds.includes(filtro));
 
+  // Cascata de entrada dos cards (montagem e troca de filtro)
+  useEffect(() => {
+    const cards = gridRef.current?.querySelectorAll<HTMLElement>('.setup-card');
+    if (cards && cards.length > 0) staggerIn(Array.from(cards), { delayStep: 60, y: 20 });
+  }, [filtro, setups.length]);
+
   return (
-    <main className="page">
+    <main className="page" ref={rootRef}>
       <div className="page-header">
         <h1>Setups</h1>
-        <div className="header-actions">
-          <Link to="/tags" className="btn btn-outline">
-            Gerenciar Tags
-          </Link>
-          <Link to="/setups/novo" className="btn btn-primary">
-            Novo Setup
-          </Link>
-        </div>
+        <Link to="/tags" className="link-sutil">
+          Gerenciar Tags
+        </Link>
       </div>
 
       <div className="filtro-tags" role="group" aria-label="Filtrar por tag">
@@ -67,13 +72,16 @@ export default function SetupList() {
       </div>
 
       {filtrados.length === 0 ? (
-        <p className="muted">
-          {setups.length === 0
-            ? 'Nenhum setup salvo ainda. Crie o primeiro!'
-            : 'Nenhum setup com essa tag.'}
-        </p>
+        <div className="empty-state">
+          <span className="empty-icone" aria-hidden="true">🎛️</span>
+          <p className="muted">
+            {setups.length === 0
+              ? 'Nenhum setup salvo ainda. Toque em “Novo Setup” para criar o primeiro!'
+              : 'Nenhum setup com essa tag.'}
+          </p>
+        </div>
       ) : (
-        <div className="setup-grid">
+        <div className="setup-grid" ref={gridRef}>
           {filtrados.map((s) => (
             <Link key={s.id} to={`/setups/${s.id}`} className="card setup-card">
               <div className="setup-card-top">

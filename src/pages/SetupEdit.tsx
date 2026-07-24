@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Pedalboard from '../components/Pedalboard';
 import TagInput from '../components/TagInput';
+import { pageIn } from '../animations';
 import { createSetup, deleteSetup, duplicateSetup, getSetup, updateSetup } from '../storage';
 import { Parametro, ParametroKey, Parametros, createDefaultParametros } from '../types';
 
@@ -14,6 +15,7 @@ import { Parametro, ParametroKey, Parametros, createDefaultParametros } from '..
 export default function SetupEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const rootRef = useRef<HTMLElement>(null);
   const ehCriacao = !id;
 
   const [nome, setNome] = useState('');
@@ -35,6 +37,10 @@ export default function SetupEdit() {
     setParametros(setup.parametros);
     setCarregado(true);
   }, [id, ehCriacao]);
+
+  useEffect(() => {
+    if (carregado) pageIn(rootRef.current);
+  }, [carregado]);
 
   const onChangeParam = (key: ParametroKey, param: Parametro) => {
     setParametros((atual) => ({ ...atual, [key]: param }));
@@ -82,12 +88,9 @@ export default function SetupEdit() {
   if (!carregado) return null;
 
   return (
-    <main className="page">
+    <main className="page" ref={rootRef}>
       <div className="page-header">
         <h1>{ehCriacao ? 'Novo Setup' : nome || 'Setup'}</h1>
-        <Link to="/setups" className="btn btn-outline">
-          Voltar
-        </Link>
       </div>
 
       <div className="setup-form">

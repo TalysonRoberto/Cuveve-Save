@@ -1,4 +1,6 @@
+import { useRef } from 'react';
 import { Parametro, ParametroDef, clampValor } from '../types';
+import { bounce } from '../animations';
 import Knob from './Knob';
 
 interface ParamFieldProps {
@@ -12,12 +14,15 @@ interface ParamFieldProps {
  * Sincronização bidirecional knob ↔ input, com clamp na faixa.
  */
 export default function ParamField({ def, param, onChange }: ParamFieldProps) {
+  const knobWrapRef = useRef<HTMLDivElement>(null);
+
   const setValor = (valor: number) => {
     onChange({ ...param, valor: clampValor(def, valor) });
   };
 
   const setAtivo = (ativo: boolean) => {
     // Valor é preservado ao desativar (KNOB-07)
+    bounce(knobWrapRef.current);
     onChange({ ...param, ativo });
   };
 
@@ -36,7 +41,9 @@ export default function ParamField({ def, param, onChange }: ParamFieldProps) {
   return (
     <div className={`param param-${def.grupo} ${param.ativo ? '' : 'param-off'}`} data-param={def.key}>
       <span className="param-label">{def.label}</span>
-      <Knob def={def} valor={param.valor} ativo={param.ativo} onChange={setValor} />
+      <div className="param-knob" ref={knobWrapRef}>
+        <Knob def={def} valor={param.valor} ativo={param.ativo} onChange={setValor} />
+      </div>
       <input
         className="param-input"
         type="number"

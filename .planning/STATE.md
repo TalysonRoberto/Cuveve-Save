@@ -9,10 +9,10 @@ Ver: .planning/PROJECT.md (atualizado em 2026-07-24)
 
 ## Posição Atual
 
-Fase: 3 de 3 (Fluxo de Setups & Tags) — **v1.0 entregue**
+Fase: 4 de 4 (Visual Moderno & Mobile) — **v1.1 entregue**
 Plano: 1 de 1 na fase atual
 Status: Fase concluída
-Última atividade: 2026-07-24 — Fase 3 concluída (fluxo completo de setups/tags; 14 testes verdes, build ok, preview servido)
+Última atividade: 2026-07-24 — Fase 4 concluída (anime.js, nav global, mobile-first; 14 testes verdes, build ok)
 
 Progresso: [██████████] 100%
 

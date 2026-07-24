@@ -6,6 +6,7 @@ status: ativo
 tokens: medio
 fonte:
   - src/App.tsx
+  - src/components/Header.tsx
   - src/pages/Home.tsx
   - src/pages/SetupEdit.tsx
   - src/pages/SetupList.tsx
@@ -13,11 +14,11 @@ fonte:
   - src/components/TagInput.tsx
   - src/components/Toast.tsx
 atualizado: 2026-07-24
-tags: [telas, rotas, fluxo]
+tags: [telas, rotas, fluxo, nav]
 ---
 
 > [!tldr] TL;DR
-> SPA com HashRouter: `/` Home, `/setups` listagem, `/setups/novo` e `/setups/:id` mesma tela (criar/editar — visualização **editável** por decisão), `/tags` gerenciador. Toast pós-salvar viaja por `location.state` para a listagem. Sem backend: tudo lê/grava via `storage.ts`.
+> SPA com HashRouter e **nav global** (`Header.tsx`): links "Página Inicial" e "Ver Setup" (NavLink ativo) + botão "Novo Setup" fixo à direita — não existem mais botões "Voltar" nas páginas. Rotas: `/` Home, `/setups` listagem, `/setups/novo` e `/setups/:id` mesma tela (criar/editar — visualização **editável**), `/tags` gerenciador. Toast pós-salvar viaja por `location.state`. Sem backend: tudo lê/grava via `storage.ts`.
 
 # Fluxo de Setups & Telas
 

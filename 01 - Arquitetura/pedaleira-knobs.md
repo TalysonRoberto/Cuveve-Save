@@ -9,13 +9,14 @@ fonte:
   - src/components/knobMath.ts
   - src/components/ParamField.tsx
   - src/components/Pedalboard.tsx
+  - src/animations.ts
   - src/types.ts
 atualizado: 2026-07-24
-tags: [knob, pedalboard, svg]
+tags: [knob, pedalboard, svg, animacao]
 ---
 
 > [!tldr] TL;DR
-> A pedaleira é 3 componentes aninhados: `Pedalboard` → `ParamField` → `Knob` (SVG). Toda a física do giro está isolada em `knobMath.ts` (pura, testada). `PARAM_DEFS` em `types.ts` é a fonte única de ordem, rótulos, faixas e cores dos 10 parâmetros.
+> A pedaleira é 3 componentes aninhados: `Pedalboard` → `ParamField` → `Knob` (SVG). Toda a física do giro está em `knobMath.ts` (pura, testada); as animações (mola do indicador, stagger de entrada) vêm de `animations.ts` (anime.js v4). `PARAM_DEFS` em `types.ts` é a fonte única de ordem, rótulos, faixas e cores. No mobile a pedaleira vira grade 5×2.
 
 # Pedaleira & Knobs
 
@@ -29,6 +30,14 @@ tags: [knob, pedalboard, svg]
 
 Faixa angular −135°..+135° (12h = 0°, horário). `valueToAngle`/`angleToValue` (clamp+round), `stepAngles(9)`/`snapAngle`, `pointerAngle` (atan2).
 ⚠️ **Zona morta**: ângulos |a| > 135° (fundo do knob) são **ignorados** no drag — ver [[2026-07-24-knob-zona-morta]].
+
+## Animação do indicador (anime.js)
+
+O Knob separa **valor** (prop) de **ângulo exibido** (state): mudança externa (input/clique/teclado) dispara `knobSpring` (`createSpring`) animando um objeto `{angulo}` com `onUpdate` → state; durante o drag o ângulo segue direto (cancela a mola). Guarda de `prefers-reduced-motion` em todos os helpers. LED escala via CSS no `:active`; toggle ON/OFF dispara `bounce` no wrapper. Cleanup de effect não pode retornar `animation.cancel()` (TS) — usar bloco.
+
+## Layout responsivo
+
+Desktop: fileira única com scroll horizontal. **Mobile (≤720px): grade CSS 5×2** (`grid-template-columns: repeat(5, 1fr)`), knobs ~15vw, alvos de toque maiores. Entrada em cascata (`staggerIn` nos `.param`) na montagem.
 
 ## Estado desativado (acessibilidade)
 

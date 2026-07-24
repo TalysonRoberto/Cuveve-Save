@@ -1,5 +1,7 @@
-import { useCallback, useId, useRef } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { JSAnimation } from 'animejs';
 import { ParametroDef } from '../types';
+import { knobSpring } from '../animations';
 import { ANG_MAX, ANG_MIN, pointerAngle, snapAngle, stepAngles, valueToAngle, angleToValue } from './knobMath';
 
 interface KnobProps {
@@ -25,11 +27,32 @@ function polar(ang: number, raio: number): { x: number; y: number } {
 export default function Knob({ def, valor, ativo, onChange }: KnobProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const dragging = useRef(false);
+  const animacao = useRef<JSAnimation | undefined>(undefined);
   const gradId = useId();
   const glowId = useId();
 
   const steps = def.max - def.min + 1;
-  const angle = valueToAngle(valor, def.min, def.max);
+  const anguloAlvo = valueToAngle(valor, def.min, def.max);
+
+  // Ângulo exibido: segue o valor com mola (input/clique/teclado) e
+  // responde direto durante o arraste.
+  const [anguloExibido, setAnguloExibido] = useState(anguloAlvo);
+
+  useEffect(() => {
+    animacao.current?.cancel();
+    if (dragging.current) {
+      setAnguloExibido(anguloAlvo);
+      return;
+    }
+    setAnguloExibido((atual) => {
+      animacao.current = knobSpring(atual, anguloAlvo, setAnguloExibido);
+      return atual;
+    });
+    return () => {
+      animacao.current?.cancel();
+    };
+  }, [anguloAlvo]);
+
   const cor = ativo ? GRUPO_COR[def.grupo] : 'var(--desativado)';
 
   const emitirAngulo = useCallback(
@@ -86,6 +109,7 @@ export default function Knob({ def, valor, ativo, onChange }: KnobProps) {
   };
 
   const positions = def.continuo ? [] : stepAngles(steps);
+  const posicaoAtual = valor - def.min;
 
   return (
     <svg
@@ -108,9 +132,9 @@ export default function Knob({ def, valor, ativo, onChange }: KnobProps) {
     >
       <defs>
         <radialGradient id={gradId} cx="38%" cy="32%" r="75%">
-          <stop offset="0%" stopColor="#3a3b44" />
-          <stop offset="70%" stopColor="#1c1d23" />
-          <stop offset="100%" stopColor="#101116" />
+          <stop offset="0%" stopColor="#454650" />
+          <stop offset="70%" stopColor="#1e1f26" />
+          <stop offset="100%" stopColor="#12131a" />
         </radialGradient>
         <filter id={glowId} x="-60%" y="-60%" width="220%" height="220%">
           <feGaussianBlur stdDeviation="2.6" result="blur" />
@@ -124,13 +148,13 @@ export default function Knob({ def, valor, ativo, onChange }: KnobProps) {
       {/* Anel de posições (somente knobs 0–8) — pontos clicáveis */}
       {positions.map((ang, i) => {
         const p = polar(ang, 45);
-        const ativoPonto = i <= valor - def.min;
+        const ativoPonto = i <= posicaoAtual;
         return (
           <circle
             key={i}
             cx={p.x}
             cy={p.y}
-            r={i === valor - def.min ? 3.1 : 2.2}
+            r={i === posicaoAtual ? 3.2 : 2.2}
             className="knob-dot"
             fill={ativoPonto ? cor : 'var(--border)'}
             onPointerDown={(e) => {
@@ -141,7 +165,7 @@ export default function Knob({ def, valor, ativo, onChange }: KnobProps) {
             <title>{`${def.label}: ${def.min + i}`}</title>
           </circle>
         );
-        })}
+      })}
 
       {/* Corpo do knob (dome) */}
       <circle cx="50" cy="50" r="33" fill={`url(#${gradId})`} stroke="var(--border)" strokeWidth="1.5" />
@@ -151,6 +175,7 @@ export default function Knob({ def, valor, ativo, onChange }: KnobProps) {
         cx="50"
         cy="50"
         r="26"
+        className="knob-led"
         fill="none"
         stroke={cor}
         strokeWidth="2.4"
@@ -158,8 +183,8 @@ export default function Knob({ def, valor, ativo, onChange }: KnobProps) {
         filter={ativo ? `url(#${glowId})` : undefined}
       />
 
-      {/* Indicador de posição */}
-      <g transform={`rotate(${angle} 50 50)`}>
+      {/* Indicador de posição (ângulo animado) */}
+      <g transform={`rotate(${anguloExibido} 50 50)`}>
         <line x1="50" y1="50" x2="50" y2="22" stroke={cor} strokeWidth="3.4" strokeLinecap="round" />
         <circle cx="50" cy="20" r="2.6" fill={cor} />
       </g>

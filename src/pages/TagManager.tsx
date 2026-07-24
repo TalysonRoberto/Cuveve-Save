@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
 import Toast, { useToast } from '../components/Toast';
+import { pageIn } from '../animations';
 import { countSetupsByTag, createOrGetTag, deleteTag, listTags, renameTag } from '../storage';
 import { Tag } from '../types';
 
 export default function TagManager() {
   const { toast, showToast } = useToast();
+  const rootRef = useRef<HTMLElement>(null);
   const [tags, setTags] = useState<Tag[]>([]);
   const [contagem, setContagem] = useState<Record<string, number>>({});
   const [novaTag, setNovaTag] = useState('');
@@ -17,7 +18,10 @@ export default function TagManager() {
     setContagem(countSetupsByTag());
   };
 
-  useEffect(recarregar, []);
+  useEffect(() => {
+    recarregar();
+    pageIn(rootRef.current);
+  }, []);
 
   const criar = () => {
     const tag = createOrGetTag(novaTag);
@@ -57,12 +61,9 @@ export default function TagManager() {
   };
 
   return (
-    <main className="page">
+    <main className="page" ref={rootRef}>
       <div className="page-header">
         <h1>Tags</h1>
-        <Link to="/setups" className="btn btn-outline">
-          Voltar
-        </Link>
       </div>
 
       <div className="tag-nova">

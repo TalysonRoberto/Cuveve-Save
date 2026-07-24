@@ -9,7 +9,6 @@ fonte:
 atualizado: 2026-07-24
 tags: [overview, stack]
 ---
-
 > [!tldr] TL;DR
 > **Cuvave-Save** é um web app local (React + Vite + TS, localStorage — sem backend) para músicos salvarem e gerenciarem "setups" da pedaleira Cuvave. Reproduz visualmente a fileira de 10 knobs do pedal (cores e ordem fiéis) com ajuste por arraste ou digitação, e funciona como catálogo: criar, listar, filtrar por tags, visualizar, editar, duplicar e excluir setups.
 
@@ -22,10 +21,11 @@ Catálogo digital de setups da pedaleira Cuvave. O músico configura os 10 parâ
 | Camada | Tecnologia |
 |---|---|
 | Frontend | React 18 + TypeScript + Vite |
-| Roteamento | react-router-dom |
+| Animações | anime.js v4 (`src/animations.ts`, com guarda de reduced-motion) |
+| Roteamento | react-router-dom (HashRouter) |
 | Persistência | localStorage (sem backend) |
-| Estilo | CSS próprio (tema escuro do pedal) |
-| Testes | vitest (lógica de storage/modelo) |
+| Estilo | CSS próprio (tema escuro glass, mobile-first) |
+| Testes | vitest (lógica de storage/modelo/knobMath) |
 
 ## Como rodar (dev)
 ```bash
@@ -38,8 +38,10 @@ npm test         # testes da camada de dados
 ## Estrutura do código (alto nível)
 - `src/types.ts` → modelo de dados (Setup, Tag, Parametro, PARAM_DEFS)
 - `src/storage.ts` → camada de persistência localStorage (CRUD setups/tags, normalização de tag)
-- `src/components/Knob.tsx` → knob interativo (contínuo 0–100 e snap 0–8)
-- `src/components/Pedalboard.tsx` → fileira dos 10 knobs com cores do pedal
+- `src/animations.ts` → helpers anime.js v4 (entrada, stagger, mola do knob, bounce)
+- `src/components/Header.tsx` → nav global (Página Inicial / Ver Setup; botão Novo Setup à direita)
+- `src/components/Knob.tsx` → knob interativo (contínuo 0–100 e snap 0–8, indicador com mola)
+- `src/components/Pedalboard.tsx` → fileira dos 10 knobs com cores do pedal (grade 5×2 no mobile)
 - `src/pages/` → Home, SetupEdit (criar/editar/visualizar), SetupList, TagManager
 - Ver notas de arquitetura em [[01 - Arquitetura]]
 
