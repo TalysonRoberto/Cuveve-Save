@@ -1062,9 +1062,9 @@ body {
 
   /* Pedal como painel vertical estreito e alto */
   .pedal {
-    width: min(92vw, 260px);
+    width: min(92vw, 240px);
     margin: 0 auto;
-    padding: 0.8rem 0.7rem;
+    padding: 0.8rem 0.9rem;
     border-radius: 22px;
     flex: 1;
     min-height: 0;
@@ -1124,7 +1124,8 @@ body {
     grid-template-rows: auto;
     align-items: center;
     justify-items: center;
-    column-gap: 0.4rem;
+    justify-content: space-between;
+    column-gap: 0.5rem;
     flex: none;
     min-height: 0;
     width: 100%;
