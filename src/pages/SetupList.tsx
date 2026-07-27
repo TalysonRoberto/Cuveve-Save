@@ -7,6 +7,26 @@ import { Setup, Tag } from '../types';
 
 const TODAS = '__todas__';
 
+const CORES_TAGS = [
+  '#34e06a', // verde
+  '#3b82f6', // azul
+  '#f59e0b', // laranja
+  '#ef4444', // vermelho
+  '#a855f7', // roxo
+  '#ec4899', // rosa
+  '#06b6d4', // ciano
+  '#facc15', // amarelo
+];
+
+function corTag(nome: string): string {
+  let hash = 0;
+  for (let i = 0; i < nome.length; i++) {
+    hash = nome.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const index = Math.abs(hash) % CORES_TAGS.length;
+  return CORES_TAGS[index];
+}
+
 export default function SetupList() {
   const location = useLocation();
   const { toast, showToast } = useToast();
@@ -84,19 +104,21 @@ export default function SetupList() {
         <div className="setup-grid" ref={gridRef}>
           {filtrados.map((s) => (
             <Link key={s.id} to={`/setups/${s.id}`} className="card setup-card">
-              {s.tagIds.length > 0 && (
-                <div className="setup-badges" aria-label="Tags do setup">
-                  {s.tagIds.map((id) => {
-                    const t = tagsPorId.get(id);
-                    return t ? (
-                      <span key={id} className="badge">
-                        {t.nome}
-                      </span>
-                    ) : null;
-                  })}
-                </div>
-              )}
-              <h2 className="setup-nome">{s.nome}</h2>
+              <div className="setup-card-header">
+                <h2 className="setup-nome">{s.nome}</h2>
+                {s.tagIds.length > 0 && (
+                  <div className="setup-badges" aria-label="Tags do setup">
+                    {s.tagIds.map((id) => {
+                      const t = tagsPorId.get(id);
+                      return t ? (
+                        <span key={id} className="badge" style={{ '--tag-color': corTag(t.nome) } as React.CSSProperties}>
+                          {t.nome}
+                        </span>
+                      ) : null;
+                    })}
+                  </div>
+                )}
+              </div>
               <span className="muted setup-data">
                 Atualizado em {new Date(s.atualizadoEm).toLocaleDateString('pt-BR')}
               </span>

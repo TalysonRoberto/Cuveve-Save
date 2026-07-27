@@ -27,7 +27,7 @@ tags: [telas, rotas, fluxo, nav]
 | Rota | Página | Notas |
 |---|---|---|
 | `/` | Home | Só 2 ações: Ver Setups / Salvar Novo Setup, sem scroll |
-| `/setups` | SetupList | Cards clicáveis + filtro chips ("Todas" + tags, instantâneo) + toast pós-ação |
+| `/setups` | SetupList | Cards compactos: título + tags na mesma linha; tags com cores diferentes (geradas por hash do nome); filtro chips ("Todas" + tags, instantâneo) + toast pós-ação |
 | `/setups/novo` | SetupEdit | Modo criar: params default 0/ativo |
 | `/setups/:id` | SetupEdit | **Visualização travada por padrão**: nome + tags no topo, pedal no centro, ações Editar/Duplicar/Excluir embaixo. Editar habilita o modo edição. |
 | `/tags` | TagManager | Criar/renomear inline/excluir com contagem de uso |
