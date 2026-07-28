@@ -33,7 +33,7 @@ export const PARAM_DEFS: readonly ParametroDef[] = [
   { key: 'mix', label: 'MIX', grupo: 'azul', min: 1, max: 100, continuo: true },
   { key: 'fb', label: 'FB', grupo: 'azul', min: 1, max: 100, continuo: true },
   { key: 'time', label: 'TIME', grupo: 'azul', min: 1, max: 30, continuo: true },
-  { key: 'mod', label: 'MOD', grupo: 'azul', min: 1, max: 15, continuo: false },
+  { key: 'mod', label: 'MOD', grupo: 'azul', min: 1, max: 15, continuo: true },
   { key: 'tone', label: 'TONE', grupo: 'vermelho', min: 1, max: 15, continuo: true },
   { key: 'gain', label: 'GAIN', grupo: 'vermelho', min: 1, max: 9, continuo: true },
   { key: 'type', label: 'TYPE', grupo: 'vermelho', min: 1, max: 9, continuo: false },
@@ -78,9 +78,9 @@ export function createDefaultParametros(): Parametros {
 
 /** Rótulo descritivo do efeito MOD (Chorus 1-7, Off=8, Phaser 9-15). */
 export function labelMod(valor: number): string {
-  if (valor <= 7) return `Chorus ${valor}`;
-  if (valor >= 9) return `Phaser ${valor - 8}`;
-  return 'Off';
+  if (valor <= 7) return ` ${valor}`;
+  if (valor >= 9) return ` ${valor}`;
+  return 'off';
 }
 
 /** Corrige valor para dentro da faixa do parâmetro (arredonda e clampa). */
