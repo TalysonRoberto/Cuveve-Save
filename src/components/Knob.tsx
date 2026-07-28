@@ -2,6 +2,7 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { JSAnimation } from 'animejs';
 import { ParametroDef } from '../types';
 import { knobSpring } from '../animations';
+import { hapticImpact } from '../hooks/haptics';
 import { ANG_MAX, ANG_MIN, pointerAngle, snapAngle, stepAngles, valueToAngle, angleToValue } from './knobMath';
 
 interface KnobProps {
@@ -74,6 +75,7 @@ export default function Knob({ def, valor, ativo, onChange, readOnly }: KnobProp
 
   const onPointerDown = (e: React.PointerEvent<SVGSVGElement>) => {
     dragging.current = true;
+    hapticImpact('light');
     e.currentTarget.setPointerCapture(e.pointerId);
     const { cx, cy } = centroPagina();
     emitirAngulo(pointerAngle(cx, cy, e.clientX, e.clientY));

@@ -1,6 +1,7 @@
 import { useRef } from 'react';
-import { Parametro, ParametroDef, clampValor } from '../types';
+import { Parametro, ParametroDef, clampValor, labelMod } from '../types';
 import { bounce } from '../animations';
+import { hapticImpact } from '../hooks/haptics';
 import Knob from './Knob';
 
 interface ParamFieldProps {
@@ -26,6 +27,7 @@ export default function ParamField({ def, param, onChange, readOnly }: ParamFiel
     if (readOnly) return;
     // Valor é preservado ao desativar (KNOB-07)
     bounce(knobWrapRef.current);
+    hapticImpact('light');
     onChange({ ...param, ativo });
   };
 
@@ -47,19 +49,25 @@ export default function ParamField({ def, param, onChange, readOnly }: ParamFiel
       <div className="param-knob" ref={knobWrapRef}>
         <Knob def={def} valor={param.valor} ativo={param.ativo} onChange={setValor} readOnly={readOnly} />
       </div>
-      <input
-        className="param-input"
-        type="number"
-        inputMode="numeric"
-        min={def.min}
-        max={def.max}
-        step={1}
-        value={param.valor}
-        aria-label={`${def.label} valor`}
-        onChange={onInput}
-        onBlur={onBlur}
-        disabled={readOnly}
-      />
+      {def.key === 'mod' ? (
+        <span className="param-input param-input-readonly" aria-label={`${def.label} valor`} title={labelMod(param.valor)}>
+          {labelMod(param.valor)}
+        </span>
+      ) : (
+        <input
+          className="param-input"
+          type="number"
+          inputMode="numeric"
+          min={def.min}
+          max={def.max}
+          step={1}
+          value={param.valor}
+          aria-label={`${def.label} valor`}
+          onChange={onInput}
+          onBlur={onBlur}
+          disabled={readOnly}
+        />
+      )}
       <button
         type="button"
         className={`param-toggle ${param.ativo ? 'toggle-on' : 'toggle-off'}`}

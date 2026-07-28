@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Preset Vault</string>
+    <string name="title_activity_main">Preset Vault</string>
+    <string name="package_name">com.presetvault.save</string>
+    <string name="custom_url_scheme">com.presetvault.save</string>
+</resources>

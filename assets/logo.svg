@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0b0e"/>
+      <stop offset="100%" stop-color="#1a1a24"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34e06a"/>
+      <stop offset="100%" stop-color="#28b657"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  
+  <!-- Outer ring -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="url(#accent)" stroke-width="8" opacity="0.3"/>
+  
+  <!-- Inner knob -->
+  <circle cx="256" cy="256" r="120" fill="#14151c" stroke="url(#accent)" stroke-width="4"/>
+  
+  <!-- LED glow -->
+  <circle cx="256" cy="256" r="90" fill="none" stroke="url(#accent)" stroke-width="3" opacity="0.5"/>
+  
+  <!-- Indicator line -->
+  <line x1="256" y1="256" x2="256" y2="160" stroke="url(#accent)" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Indicator dot -->
+  <circle cx="256" cy="155" r="8" fill="url(#accent)"/>
+  
+  <!-- PV text -->
+  <text x="256" y="320" text-anchor="middle" font-family="system-ui, sans-serif" font-size="48" font-weight="800" fill="url(#accent)" letter-spacing="0.1em">PV</text>
+</svg>

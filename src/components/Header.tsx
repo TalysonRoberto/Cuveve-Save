@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <header className="topnav">
       <Link to="/" className="topnav-brand" aria-label="Cuvave-Save — Página Inicial">
-        <span className="brand-cuvave">CUVAVE</span>
+        <span className="brand-cuvave">PresetVault</span>
         <span className="brand-save">save</span>
       </Link>
 

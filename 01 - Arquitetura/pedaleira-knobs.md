@@ -11,12 +11,12 @@ fonte:
   - src/components/Pedalboard.tsx
   - src/animations.ts
   - src/types.ts
-atualizado: 2026-07-24
+atualizado: 2026-07-28
 tags: [knob, pedalboard, svg, animacao]
 ---
 
 > [!tldr] TL;DR
-> A pedaleira é 3 componentes aninhados: `Pedalboard` → `ParamField` → `Knob` (SVG). Toda a física do giro está em `knobMath.ts` (pura, testada); as animações (mola do indicador, stagger de entrada) vêm de `animations.ts` (anime.js v4). `PARAM_DEFS` em `types.ts` é a fonte única de ordem, rótulos, faixas e cores. No mobile retrato os 10 parâmetros são empilhados verticalmente (TYPE no topo, VOLUME embaixo via `column-reverse`); cada parâmetro é uma linha horizontal com label, knob, valor e ON todos deitados (na horizontal). Na paisagem mantém a fileira horizontal. Footswitches A/B/C removidos na v1.2.
+> A pedaleira é 3 componentes aninhados: `Pedalboard` → `ParamField` → `Knob` (SVG). Toda a física do giro está em `knobMath.ts` (pura, testada); as animações (mola do indicador, stagger de entrada) vêm de `animations.ts` (anime.js v4). `PARAM_DEFS` em `types.ts` é a fonte única de ordem, rótulos, faixas e cores. MOD tem lógica especial: 1-7 Chorus, 8 Off, 9-15 Phaser, default no 8. No mobile retrato os 10 parâmetros são empilhados verticalmente (TYPE no topo, VOLUME embaixo via `column-reverse`); cada parâmetro é uma linha horizontal com label, knob, valor e ON todos deitados (na horizontal). Na paisagem mantém a fileira horizontal. Footswitches A/B/C removidos na v1.2.
 
 # Pedaleira & Knobs
 
@@ -42,6 +42,15 @@ Desktop e mobile paisagem: fileira única com scroll horizontal (`display: flex;
 ## Estética do knob
 
 Dome escuro via `radialGradient` (#3a3b44 → #181920 → #0d0e12). LED interno e indicador usam a cor do grupo; quando OFF caem para `--desativado`. Glow SVG (`feGaussianBlur stdDeviation="4"`) aplicado no LED e nos pontos de posição ativos para dar o brilho da referência. Indicador fino (2.2px) com círculo na ponta. Pontos inativos ficam com `opacity: 0.45` e cor `--border`.
+
+## MOD: lógica especial de efeito
+
+MOD usa `min: 1, max: 15, continuo: false`. A faixa é dividida em três zonas:
+- **1–7**: Chorus (`labelMod` retorna "Chorus N")
+- **8**: Off / desligado (`labelMod` retorna "Off")
+- **9–15**: Phaser (`labelMod` retorna "Phaser N-8")
+
+Novo setup começa com MOD = 8 (posição nula). No `ParamField`, MOD exibe o rótulo descritivo em vez do input numérico, já que o valor é categórico. O knob mantém snap nas 15 posições.
 
 ## Estado desativado (acessibilidade)
 

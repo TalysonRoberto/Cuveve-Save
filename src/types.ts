@@ -28,15 +28,15 @@ export interface ParametroDef {
 /** Ordem física do pedal Cuvave, da esquerda para a direita. */
 export const PARAM_DEFS: readonly ParametroDef[] = [
   { key: 'volume', label: 'VOLUME', grupo: 'branco', min: 0, max: 100, continuo: true },
-  { key: 'ir_cab', label: 'IR CAB', grupo: 'verde', min: 0, max: 8, continuo: false },
-  { key: 'reverb', label: 'REVERB', grupo: 'verde', min: 0, max: 8, continuo: false },
-  { key: 'mix', label: 'MIX', grupo: 'azul', min: 0, max: 8, continuo: false },
-  { key: 'fb', label: 'FB', grupo: 'azul', min: 0, max: 8, continuo: false },
-  { key: 'time', label: 'TIME', grupo: 'azul', min: 0, max: 8, continuo: false },
-  { key: 'mod', label: 'MOD', grupo: 'azul', min: 0, max: 8, continuo: false },
-  { key: 'tone', label: 'TONE', grupo: 'vermelho', min: 0, max: 8, continuo: false },
-  { key: 'gain', label: 'GAIN', grupo: 'vermelho', min: 0, max: 8, continuo: false },
-  { key: 'type', label: 'TYPE', grupo: 'vermelho', min: 0, max: 8, continuo: false },
+  { key: 'ir_cab', label: 'IR CAB', grupo: 'verde', min: 1, max: 9, continuo: false },
+  { key: 'reverb', label: 'REVERB', grupo: 'verde', min: 1, max: 15, continuo: true },
+  { key: 'mix', label: 'MIX', grupo: 'azul', min: 1, max: 100, continuo: true },
+  { key: 'fb', label: 'FB', grupo: 'azul', min: 1, max: 100, continuo: true },
+  { key: 'time', label: 'TIME', grupo: 'azul', min: 1, max: 30, continuo: true },
+  { key: 'mod', label: 'MOD', grupo: 'azul', min: 1, max: 15, continuo: false },
+  { key: 'tone', label: 'TONE', grupo: 'vermelho', min: 1, max: 15, continuo: true },
+  { key: 'gain', label: 'GAIN', grupo: 'vermelho', min: 1, max: 9, continuo: true },
+  { key: 'type', label: 'TYPE', grupo: 'vermelho', min: 1, max: 9, continuo: false },
 ] as const;
 
 export const PARAM_DEF_MAP: ReadonlyMap<ParametroKey, ParametroDef> = new Map(
@@ -69,9 +69,18 @@ export interface Tag {
 export function createDefaultParametros(): Parametros {
   const out = {} as Parametros;
   for (const def of PARAM_DEFS) {
-    out[def.key] = { valor: def.min, ativo: true };
+    // MOD começa no meio (8) = desligado
+    const valor = def.key === 'mod' ? 8 : def.min;
+    out[def.key] = { valor, ativo: true };
   }
   return out;
+}
+
+/** Rótulo descritivo do efeito MOD (Chorus 1-7, Off=8, Phaser 9-15). */
+export function labelMod(valor: number): string {
+  if (valor <= 7) return `Chorus ${valor}`;
+  if (valor >= 9) return `Phaser ${valor - 8}`;
+  return 'Off';
 }
 
 /** Corrige valor para dentro da faixa do parâmetro (arredonda e clampa). */

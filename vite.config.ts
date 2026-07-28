@@ -8,4 +8,22 @@ export default defineConfig({
     globals: true,
     environment: 'node',
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-animation': ['animejs'],
+          'vendor-capacitor': [
+            '@capacitor/core',
+            '@capacitor/app',
+            '@capacitor/haptics',
+            '@capacitor/filesystem',
+            '@capacitor/share',
+            '@capacitor/local-notifications',
+          ],
+        },
+      },
+    },
+  },
 });

@@ -20,7 +20,7 @@ export default function Pedalboard({ parametros, onChange, readOnly }: Pedalboar
   return (
     <section className="pedal" aria-label="Pedaleira Cuvave">
       <div className="pedal-top">
-        <span className="pedal-brand pedal-brand-top">CUVAVE</span>
+        <span className="pedal-brand pedal-brand-top">Preset Vault</span>
       </div>
 
       <div className="pedal-knobs" role="group" aria-label="Parâmetros" ref={knobsRef}>
@@ -35,9 +35,9 @@ export default function Pedalboard({ parametros, onChange, readOnly }: Pedalboar
         ))}
       </div>
 
-      <div className="pedal-bottom" aria-hidden="true">
-        <span className="pedal-brand pedal-brand-bottom">CUVAVE</span>
-      </div>
+      {/* <div className="pedal-bottom" aria-hidden="true">
+        <span className="pedal-brand pedal-brand-bottom">Cuvave</span>
+      </div> */}
     </section>
   );
 }

@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <main className="home" ref={rootRef}>
       <header className="home-brand">
-        <span className="home-logo home-anim">CUVAVE</span>
+        <span className="home-logo home-anim">Preset Vault</span>
         <h1 className="home-title home-anim">Seu som, salvo.</h1>
         <p className="home-sub home-anim">
           Monte o setup da sua pedaleira, salve e recupere em segundos — direto do celular.

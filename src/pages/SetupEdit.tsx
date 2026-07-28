@@ -5,6 +5,7 @@ import TagInput from '../components/TagInput';
 import { bounce, pageIn } from '../animations';
 import { createSetup, deleteSetup, duplicateSetup, getSetup, listTags, updateSetup } from '../storage';
 import { Parametro, ParametroKey, Parametros, Setup, Tag, createDefaultParametros } from '../types';
+import { hapticSuccess, hapticError } from '../hooks/haptics';
 
 export default function SetupEdit() {
   const { id } = useParams();
@@ -53,6 +54,7 @@ export default function SetupEdit() {
   const salvar = () => {
     if (!nome.trim()) {
       setErroNome('Dê um nome ao setup para salvar.');
+      hapticError();
       return;
     }
     if (ehCriacao) {
@@ -60,6 +62,7 @@ export default function SetupEdit() {
     } else {
       updateSetup(id, { nome, tagIds, parametros });
     }
+    hapticSuccess();
     navigate('/setups', { state: { toast: ehCriacao ? 'Setup salvo com sucesso' : 'Setup atualizado com sucesso' } });
   };
 
@@ -86,6 +89,7 @@ export default function SetupEdit() {
     if (ehCriacao) return;
     if (window.confirm(`Excluir o setup "${nome}"? Esta ação não pode ser desfeita.`)) {
       deleteSetup(id);
+      hapticSuccess();
       navigate('/setups', { state: { toast: 'Setup excluído' } });
     }
   };
